@@ -29,8 +29,12 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Reglas estrictas para impresión o guardado a PDF perfecto */
+/* Reglas estrictas para impresión o guardado a PDF perfecto (Todo en 1 sola hoja) */
 @media print {
+    @page {
+        size: portrait;
+        margin: 10mm;
+    }
     body * {
         visibility: hidden;
     }
@@ -43,7 +47,7 @@ body {
         top: 0;
         width: 100%;
         margin: 0;
-        padding: 0 !important;
+        padding: 5px !important;
         box-shadow: none !important;
         border: none !important;
         display: block !important;

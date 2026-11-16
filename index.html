@@ -91,42 +91,42 @@
             </button>
         </div>
 
-        <!-- VISTA DE LA PROPUESTA (Lo que se muestra limpio / se captura) -->
-        <div id="vistaPropuesta" class="card proposal-card shadow-lg border-0 d-none p-3 p-md-5 bg-white">
-            <div class="card-body px-0 px-md-3">
+        <!-- VISTA DE LA PROPUESTA (Lo que se muestra limpio / se captura / se imprime) -->
+        <div id="vistaPropuesta" class="card proposal-card shadow-lg border-0 d-none p-3 p-md-4 bg-white">
+            <div class="card-body px-0 px-md-2">
                 <!-- Header de la Propuesta -->
-                <div class="row border-bottom pb-4 mb-4 align-items-center">
+                <div class="row border-bottom pb-3 mb-3 align-items-center">
                     <div class="col-12 col-sm-6">
-                        <h2 class="fw-bold text-primary mb-1"><i class="fa-solid fa-shield-heart me-2"></i>Plan de Salud</h2>
-                        <p class="text-muted mb-0">Resumen de Coberturas y Prestadores</p>
+                        <h2 class="fw-bold text-primary mb-1 fs-3"><i class="fa-solid fa-shield-heart me-2"></i>Plan de Salud</h2>
+                        <p class="text-muted mb-0 small">Resumen de Coberturas y Prestadores</p>
                     </div>
                     <div class="col-12 col-sm-6 text-sm-end mt-2 mt-sm-0">
-                        <span class="badge bg-light text-dark border p-2 fs-6">Fecha: <strong id="lblFecha">--/--/----</strong></span>
+                        <span class="badge bg-light text-dark border p-2">Fecha: <strong id="lblFecha">--/--/----</strong></span>
                     </div>
                 </div>
 
                 <!-- Datos del Cliente -->
-                <div class="row bg-light rounded p-3 mb-4 g-3 align-items-center">
+                <div class="row bg-light rounded p-2 px-3 mb-3 g-2 align-items-center">
                     <div class="col-12 col-md-7">
-                        <span class="text-muted small d-block">CLIENTE / PROPUESTA</span>
-                        <h4 class="fw-bold text-dark mb-0 text-break" id="lblNombreCliente">Sin nombre especificado</h4>
+                        <span class="text-muted small d-block" style="font-size: 0.75rem;">NOMBRE</span>
+                        <h5 class="fw-bold text-dark mb-0 text-break" id="lblNombreCliente">Sin nombre especificado</h5>
                     </div>
                     <div class="col-12 col-md-5 text-md-end">
-                        <span class="text-muted small d-block">VALOR TOTAL DEL PLAN</span>
-                        <h3 class="fw-bold text-success mb-0" id="lblValorPlan">0.00 UF</h3>
+                        <span class="text-muted small d-block" style="font-size: 0.75rem;">VALOR TOTAL DEL PLAN</span>
+                        <h4 class="fw-bold text-success mb-0" id="lblValorPlan">0.00 UF</h4>
                     </div>
                 </div>
 
                 <!-- Información Personalizada -->
-                <div id="seccionInfoPersonalizada" class="alert alert-info border-0 shadow-sm mb-4 d-none">
-                    <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-circle-info me-2"></i>Notas y Observaciones para el Cliente:</h6>
-                    <p class="mb-0 text-dark" id="lblInfoPersonalizada" style="white-space: pre-line;"></p>
+                <div id="seccionInfoPersonalizada" class="alert alert-info border-0 shadow-sm p-2 px-3 mb-3 d-none">
+                    <h6 class="fw-bold text-primary mb-1 small"><i class="fa-solid fa-circle-info me-1"></i>Notas y observaciones personalizadas:</h6>
+                    <p class="mb-0 text-dark small" id="lblInfoPersonalizada" style="white-space: pre-line;"></p>
                 </div>
 
-                <!-- Tabla de Prestadores Seleccionados (Foco Principal) -->
-                <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-list-check me-2"></i>Prestadores Incluidos en su Plan</h5>
-                <div class="table-responsive mb-4">
-                    <table class="table table-bordered align-middle">
+                <!-- Tabla de Prestadores Seleccionados -->
+                <h6 class="fw-bold text-secondary mb-2"><i class="fa-solid fa-list-check me-1"></i>Prestadores Incluidos en su Plan</h6>
+                <div class="table-responsive mb-3">
+                    <table class="table table-bordered table-sm align-middle mb-0" style="font-size: 0.9rem;">
                         <thead class="table-secondary">
                             <tr>
                                 <th>Prestador</th>
@@ -141,75 +141,60 @@
                     </table>
                 </div>
 
-                <!-- BENEFICIOS ADICIONALES PRINCIPALES -->
-                <div class="card bg-light border-0 shadow-sm p-4 mb-3">
-                    <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-star text-warning me-2"></i>Beneficios Adicionales del Plan</h5>
-                    <div class="row g-3">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
-                                <i class="fa-solid fa-shield-virus text-danger fs-4 me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0 fs-6">Seguro Catastrófico</h6>
-                                    <small class="text-muted">Enfermedades Alto Costo</small>
-                                </div>
+                <!-- BENEFICIOS ADICIONALES PRINCIPALES (Agrupados y compactos) -->
+                <div class="card bg-light border-0 shadow-sm p-3 mb-2">
+                    <h6 class="fw-bold text-dark mb-2" style="font-size: 0.95rem;"><i class="fa-solid fa-star text-warning me-1"></i>Beneficios Adicionales del Plan</h6>
+                    <div class="row g-2">
+                        <div class="col-md-4 col-sm-6">
+                            <div class="d-flex align-items-center bg-white p-2 rounded border h-100" style="font-size: 0.85rem;">
+                                <i class="fa-solid fa-shield-virus text-danger me-2 fs-5"></i>
+                                <div><strong>Seguro Catastrófico</strong><div class="text-muted" style="font-size: 0.75rem;">Alto Costo</div></div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
-                                <i class="fa-solid fa-file-contract text-primary fs-4 me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0 fs-6">GES</h6>
-                                    <small class="text-muted">Garantías Explícitas</small>
-                                </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="d-flex align-items-center bg-white p-2 rounded border h-100" style="font-size: 0.85rem;">
+                                <i class="fa-solid fa-file-contract text-primary me-2 fs-5"></i>
+                                <div><strong>GES</strong><div class="text-muted" style="font-size: 0.75rem;">Garantías Explícitas</div></div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
-                                <i class="fa-solid fa-globe text-success fs-4 me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0 fs-6">Cobertura Internacional</h6>
-                                    <small class="text-muted">Atención en el extranjero</small>
-                                </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="d-flex align-items-center bg-white p-2 rounded border h-100" style="font-size: 0.85rem;">
+                                <i class="fa-solid fa-globe text-success me-2 fs-5"></i>
+                                <div><strong>Cobertura Internacional</strong><div class="text-muted" style="font-size: 0.75rem;">En el extranjero</div></div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
-                                <i class="fa-solid fa-piggy-bank text-warning fs-4 me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0 fs-6">Cuenta de Excedentes Abierta</h6>
-                                    <small class="text-muted">Flexibilidad financiera</small>
-                                </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="d-flex align-items-center bg-white p-2 rounded border h-100" style="font-size: 0.85rem;">
+                                <i class="fa-solid fa-piggy-bank text-warning me-2 fs-5"></i>
+                                <div><strong>Cuenta Excedentes Abierta</strong><div class="text-muted" style="font-size: 0.75rem;">Flexibilidad financiera</div></div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
-                                <i class="fa-solid fa-glasses text-info fs-4 me-3"></i>
-                                <div>
-                                    <h6 class="fw-bold mb-0 fs-6">Cobertura Óptica</h6>
-                                    <small class="text-muted">Lentes y accesorios</small>
-                                </div>
+                        <div class="col-md-6 col-sm-12">
+                            <div class="d-flex align-items-center bg-white p-2 rounded border h-100" style="font-size: 0.85rem;">
+                                <i class="fa-solid fa-glasses text-info me-2 fs-5"></i>
+                                <div><strong>Cobertura Óptica</strong><div class="text-muted" style="font-size: 0.75rem;">Lentes y accesorios</div></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- BENEFICIOS OPTATIVOS (Diseño secundario / más sutil) -->
-                <div class="card bg-white border shadow-none p-3 mb-4">
-                    <h6 class="fw-bold text-muted mb-2 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;"><i class="fa-solid fa-plus-circle me-1"></i> Prestaciones y Coberturas Optativas Incluidas</h6>
-                    <div class="row g-2 text-secondary small">
-                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-pills text-muted me-2"></i> Descuentos en farmacia</div>
-                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-tooth text-muted me-2"></i> Cobertura dental en convenios</div>
-                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-hand-holding-heart text-muted me-2"></i> Herencia</div>
-                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-user-shield text-muted me-2"></i> Cobertura por cesantía</div>
-                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-ambulance text-muted me-2"></i> Urgencias y traslados médicos</div>
-                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-plane-departure text-muted me-2"></i> Seguro de viaje</div>
+                <!-- BENEFICIOS OPTATIVOS (Diseño secundario sin colores llamativos) -->
+                <div class="card bg-white border shadow-none p-2 mb-3">
+                    <span class="fw-bold text-muted mb-1 text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px;"><i class="fa-solid fa-plus-circle me-1"></i> Prestaciones y Coberturas Optativas</span>
+                    <div class="row g-1 text-secondary" style="font-size: 0.8rem;">
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-pills text-muted me-1"></i> Descuentos en farmacia</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-tooth text-muted me-1"></i> Cobertura dental en convenios</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-hand-holding-heart text-muted me-1"></i> Herencia</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-user-shield text-muted me-1"></i> Cobertura por cesantía</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-ambulance text-muted me-1"></i> Urgencias y traslados médicos</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-plane-departure text-muted me-1"></i> Seguro de viaje</div>
                     </div>
                 </div>
 
                 <!-- Pie de página / Nota aclaratoria -->
-                <div class="text-center text-muted small border-top pt-3 mt-4">
-                    <p class="mb-1 fw-semibold">Planes de salud referenciales</p>
-                    <p class="mb-0 text-muted" style="font-size: 0.85rem;">Documento informativo generado para el cliente.</p>
+                <div class="text-center text-muted small border-top pt-2 mt-2" style="font-size: 0.8rem;">
+                    <p class="mb-0 fw-semibold">Planes de salud referenciales</p>
+                    <p class="mb-0 text-muted" style="font-size: 0.75rem;">Documento informativo generado para el cliente.</p>
                 </div>
             </div>
         </div>
