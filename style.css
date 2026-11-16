@@ -10,22 +10,45 @@ body {
     border-top: 5px solid #0d6efd;
 }
 
+/* Clase para inputs y selectores con alerta visual en rojo cuando tienen valor */
+.input-activo-rojo {
+    color: #dc3545 !important;
+    font-weight: bold;
+    border-color: #dc3545 !important;
+}
+
+/* Estilo destacado manual por el vendedor en la propuesta final (Verde suave elegante) */
+.destacado-manual {
+    background-color: #e8f5e9 !important;
+    color: #1b5e20 !important;
+    font-weight: bold;
+}
+
 /* Evitar desbordes en tablas en móviles */
 .table-responsive {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Reglas para impresión o captura perfecta */
+/* Reglas estrictas para impresión o guardado a PDF perfecto */
 @media print {
-    .no-print {
-        display: none !important;
+    body * {
+        visibility: hidden;
     }
-    body {
-        background-color: #ffffff !important;
+    #vistaPropuesta, #vistaPropuesta * {
+        visibility: visible;
     }
-    .card.proposal-card {
+    #vistaPropuesta {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 0 !important;
         box-shadow: none !important;
         border: none !important;
-        padding: 0 !important;
+        display: block !important;
+    }
+    .no-print, #accionesFinales {
+        display: none !important;
     }
 }

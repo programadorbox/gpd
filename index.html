@@ -25,30 +25,37 @@
             </div>
         </header>
 
-        <!-- Formulario de Configuración (No se imprime) -->
+        <!-- Formulario de Configuración (Paso 1 Obligatorio) -->
         <div class="card shadow-sm mb-4 no-print border-0">
             <div class="card-body">
-                <h5 class="card-title text-dark fw-bold mb-3"><i class="fa-solid fa-user-pen me-2"></i>1. Datos del Cliente y Plan</h5>
+                <h5 class="card-title text-dark fw-bold mb-3"><i class="fa-solid fa-user-pen me-2"></i>1. Datos del Cliente y Plan <span class="text-danger">*</span></h5>
                 <div class="row g-3">
                     <div class="col-12 col-md-6">
                         <label for="nombreCliente" class="form-label fw-semibold">Nombre de la Persona / Cliente</label>
-                        <input type="text" class="form-control" id="nombreCliente" placeholder="Ej. Juan Pérez Soto">
+                        <input type="text" class="form-control" id="nombreCliente" placeholder="Ej. Juan Pérez Soto" oninput="validarPasoUno()">
                     </div>
                     <div class="col-6 col-md-3">
                         <label for="valorPlan" class="form-label fw-semibold">Valor Total del Plan (UF)</label>
-                        <input type="text" class="form-control" id="valorPlan" placeholder="Ej. 3.45 UF">
+                        <input type="text" class="form-control" id="valorPlan" placeholder="Ej. 3.45 UF" oninput="validarPasoUno()">
                     </div>
                     <div class="col-6 col-md-3">
                         <label for="fechaPropuesta" class="form-label fw-semibold">Fecha</label>
                         <input type="date" class="form-control" id="fechaPropuesta" readonly>
                     </div>
+                    <div class="col-12">
+                        <label for="infoPersonalizada" class="form-label fw-semibold">Información Personalizada / Notas para el Cliente</label>
+                        <textarea class="form-control" id="infoPersonalizada" rows="2" placeholder="Ingrese notas, observaciones o detalles específicos para esta persona..."></textarea>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Buscador y Tabla de Selección de Prestadores (No se imprime) -->
-        <div class="card shadow-sm mb-4 no-print border-0">
+        <!-- Buscador y Tabla de Selección de Prestadores (Bloqueada hasta completar el Paso 1) -->
+        <div id="bloquePrestadores" class="card shadow-sm mb-4 no-print border-0 opacity-50" style="pointer-events: none;">
             <div class="card-body">
+                <div class="alert alert-warning py-2 mb-3 small" id="alertaBloqueo">
+                    <i class="fa-solid fa-lock me-1"></i> Por favor, ingresa primero el <strong>Nombre del Cliente</strong> y el <strong>Valor del Plan</strong> para habilitar la selección de prestadores.
+                </div>
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center mb-3 gap-3">
                     <h5 class="card-title text-dark fw-bold mb-0"><i class="fa-solid fa-hospital me-2"></i>2. Seleccionar y Configurar Prestadores</h5>
                     <div class="input-group">
@@ -66,6 +73,7 @@
                                 <th>Ubicación</th>
                                 <th class="text-center" style="min-width: 150px;">Hospitalaria (%) y Tope</th>
                                 <th class="text-center" style="min-width: 150px;">Ambulatoria (%) y Tope</th>
+                                <th class="text-center" style="width: 90px;">Destacar</th>
                             </tr>
                         </thead>
                         <tbody id="tablaPrestadoresBody">
@@ -76,9 +84,9 @@
             </div>
         </div>
 
-        <!-- Botón de Generar Propuesta -->
+        <!-- Botón de Generar Plan -->
         <div class="d-grid mb-4 no-print">
-            <button class="btn btn-primary btn-lg shadow py-3" onclick="generarPropuesta()">
+            <button id="btnGenerar" class="btn btn-primary btn-lg shadow py-3" onclick="generarPropuesta()" disabled>
                 <span class="fs-5"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Generar Plan de Salud</span>
             </button>
         </div>
@@ -109,7 +117,13 @@
                     </div>
                 </div>
 
-                <!-- Tabla de Prestadores Seleccionados -->
+                <!-- Información Personalizada -->
+                <div id="seccionInfoPersonalizada" class="alert alert-info border-0 shadow-sm mb-4 d-none">
+                    <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-circle-info me-2"></i>Notas y Observaciones para el Cliente:</h6>
+                    <p class="mb-0 text-dark" id="lblInfoPersonalizada" style="white-space: pre-line;"></p>
+                </div>
+
+                <!-- Tabla de Prestadores Seleccionados (Foco Principal) -->
                 <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-list-check me-2"></i>Prestadores Incluidos en su Plan</h5>
                 <div class="table-responsive mb-4">
                     <table class="table table-bordered align-middle">
@@ -125,6 +139,71 @@
                             <!-- Inyectado por JS -->
                         </tbody>
                     </table>
+                </div>
+
+                <!-- BENEFICIOS ADICIONALES PRINCIPALES -->
+                <div class="card bg-light border-0 shadow-sm p-4 mb-3">
+                    <h5 class="fw-bold text-dark mb-3"><i class="fa-solid fa-star text-warning me-2"></i>Beneficios Adicionales del Plan</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
+                                <i class="fa-solid fa-shield-virus text-danger fs-4 me-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0 fs-6">Seguro Catastrófico</h6>
+                                    <small class="text-muted">Enfermedades Alto Costo</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
+                                <i class="fa-solid fa-file-contract text-primary fs-4 me-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0 fs-6">GES</h6>
+                                    <small class="text-muted">Garantías Explícitas</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
+                                <i class="fa-solid fa-globe text-success fs-4 me-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0 fs-6">Cobertura Internacional</h6>
+                                    <small class="text-muted">Atención en el extranjero</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
+                                <i class="fa-solid fa-piggy-bank text-warning fs-4 me-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0 fs-6">Cuenta de Excedentes Abierta</h6>
+                                    <small class="text-muted">Flexibilidad financiera</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="d-flex align-items-center bg-white p-3 rounded shadow-sm h-100 border">
+                                <i class="fa-solid fa-glasses text-info fs-4 me-3"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-0 fs-6">Cobertura Óptica</h6>
+                                    <small class="text-muted">Lentes y accesorios</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BENEFICIOS OPTATIVOS (Diseño secundario / más sutil) -->
+                <div class="card bg-white border shadow-none p-3 mb-4">
+                    <h6 class="fw-bold text-muted mb-2 text-uppercase" style="font-size: 0.85rem; letter-spacing: 0.5px;"><i class="fa-solid fa-plus-circle me-1"></i> Prestaciones y Coberturas Optativas Incluidas</h6>
+                    <div class="row g-2 text-secondary small">
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-pills text-muted me-2"></i> Descuentos en farmacia</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-tooth text-muted me-2"></i> Cobertura dental en convenios</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-hand-holding-heart text-muted me-2"></i> Herencia</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-user-shield text-muted me-2"></i> Cobertura por cesantía</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-ambulance text-muted me-2"></i> Urgencias y traslados médicos</div>
+                        <div class="col-md-4 col-sm-6"><i class="fa-solid fa-plane-departure text-muted me-2"></i> Seguro de viaje</div>
+                    </div>
                 </div>
 
                 <!-- Pie de página / Nota aclaratoria -->
