@@ -1,12 +1,18 @@
-/* Estilos personalizados para el MVP */
+/* Estilos generales y soporte móvil */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
+    background-color: #f8f9fa;
 }
 
 .proposal-card {
     border-radius: 12px;
     border-top: 5px solid #0d6efd;
+}
+
+/* Evitar desbordes en tablas en móviles */
+.table-responsive {
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Reglas para impresión o captura perfecta */

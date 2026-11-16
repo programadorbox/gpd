@@ -13,12 +13,12 @@
 </head>
 <body class="bg-light">
 
-    <div class="container py-4">
+    <div class="container py-3 py-md-4">
         <!-- Encabezado de la App -->
-        <header class="pb-3 mb-4 border-bottom d-flex justify-content-between align-items-center no-print">
+        <header class="pb-3 mb-4 border-bottom d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center gap-2 no-print">
             <div>
-                <h1 class="h3 fw-bold text-primary mb-0"><i class="fa-solid fa-file-medical me-2"></i>Generador de Propuestas de Salud</h1>
-                <p class="text-muted small mb-0">MVP de Cotizador y Visualización Rápida</p>
+                <h1 class="h4 h3-md fw-bold text-primary mb-0"><i class="fa-solid fa-file-medical me-2"></i>Propuesta de Salud</h1>
+                <p class="text-muted small mb-0">Cotizador y Visualización Rápida</p>
             </div>
             <div>
                 <button class="btn btn-outline-secondary btn-sm" onclick="location.reload()"><i class="fa-solid fa-rotate-right me-1"></i> Reiniciar</button>
@@ -30,15 +30,15 @@
             <div class="card-body">
                 <h5 class="card-title text-dark fw-bold mb-3"><i class="fa-solid fa-user-pen me-2"></i>1. Datos del Cliente y Plan</h5>
                 <div class="row g-3">
-                    <div class="col-md-6">
+                    <div class="col-12 col-md-6">
                         <label for="nombreCliente" class="form-label fw-semibold">Nombre de la Persona / Cliente</label>
                         <input type="text" class="form-control" id="nombreCliente" placeholder="Ej. Juan Pérez Soto">
                     </div>
-                    <div class="col-md-3">
-                        <label for="valorPlan" class="form-label fw-semibold">Valor Total del Plan (UF)</label>
+                    <div class="col-6 col-md-3">
+                        <label for="valorPlan" class="form-label fw-semibold">Valor (UF)</label>
                         <input type="text" class="form-control" id="valorPlan" placeholder="Ej. 3.45 UF">
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-6 col-md-3">
                         <label for="fechaPropuesta" class="form-label fw-semibold">Fecha</label>
                         <input type="date" class="form-control" id="fechaPropuesta" readonly>
                     </div>
@@ -49,19 +49,19 @@
         <!-- Buscador y Tabla de Selección de Prestadores (No se imprime) -->
         <div class="card shadow-sm mb-4 no-print border-0">
             <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center mb-3 gap-3">
                     <h5 class="card-title text-dark fw-bold mb-0"><i class="fa-solid fa-hospital me-2"></i>2. Seleccionar Prestadores</h5>
-                    <div class="input-group w-auto" style="min-width: 280px;">
+                    <div class="input-group">
                         <span class="input-group-text bg-white"><i class="fa-solid fa-search text-muted"></i></span>
                         <input type="text" id="buscadorPrestador" class="form-control" placeholder="Buscar clínica o ubicación...">
                     </div>
                 </div>
                 
-                <div class="table-responsive" style="max-height: 350px; overflow-y: auto;">
+                <div class="table-responsive" style="max-height: 400px; overflow-y: auto;">
                     <table class="table table-hover align-middle mb-0">
                         <thead class="table-dark sticky-top">
                             <tr>
-                                <th style="width: 80px;" class="text-center">Acción</th>
+                                <th style="width: 90px;" class="text-center">Acción</th>
                                 <th>Prestador</th>
                                 <th>Ubicación</th>
                                 <th class="text-center">Hospitalaria</th>
@@ -77,78 +77,37 @@
         </div>
 
         <!-- Botón de Generar Propuesta -->
-        <div class="text-center mb-4 no-print">
-            <button class="btn btn-primary btn-lg px-5 shadow" onclick="generarPropuesta()">
-                <p class="mb-0"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Generar Vista Propuesta</p>
+        <div class="d-grid mb-4 no-print">
+            <button class="btn btn-primary btn-lg shadow py-3" onclick="generarPropuesta()">
+                <span class="fs-5"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Generar Vista Propuesta</span>
             </button>
         </div>
 
         <!-- VISTA DE LA PROPUESTA (Lo que se muestra limpio / se captura) -->
-        <div id="vistaPropuesta" class="card proposal-card shadow-lg border-0 d-none p-4 p-md-5 bg-white">
-            <div class="card-body">
+        <div id="vistaPropuesta" class="card proposal-card shadow-lg border-0 d-none p-3 p-md-5 bg-white">
+            <div class="card-body px-0 px-md-3">
                 <!-- Header de la Propuesta -->
                 <div class="row border-bottom pb-4 mb-4 align-items-center">
-                    <div class="col-sm-6">
+                    <div class="col-12 col-sm-6">
                         <h2 class="fw-bold text-primary mb-1"><i class="fa-solid fa-shield-heart me-2"></i>Propuesta de Salud</h2>
                         <p class="text-muted mb-0">Resumen de Coberturas y Prestadores</p>
                     </div>
-                    <div class="col-sm-6 text-sm-end mt-3 mt-sm-0">
+                    <div class="col-12 col-sm-6 text-sm-end mt-2 mt-sm-0">
                         <span class="badge bg-light text-dark border p-2 fs-6">Fecha: <strong id="lblFecha">--/--/----</strong></span>
                     </div>
                 </div>
 
                 <!-- Datos del Cliente -->
                 <div class="row bg-light rounded p-3 mb-4 g-3 align-items-center">
-                    <div class="col-md-7">
+                    <div class="col-12 col-md-7">
                         <span class="text-muted small d-block">CLIENTE / PROPUESTA</span>
-                        <h4 class="fw-bold text-dark mb-0" id="lblNombreCliente">Sin nombre especificado</h4>
+                        <h4 class="fw-bold text-dark mb-0 text-break" id="lblNombreCliente">Sin nombre especificado</h4>
                     </div>
-                    <div class="col-md-5 text-md-end">
+                    <div class="col-12 col-md-5 text-md-end">
                         <span class="text-muted small d-block">VALOR TOTAL DEL PLAN</span>
                         <h3 class="fw-bold text-success mb-0" id="lblValorPlan">0.00 UF</h3>
                     </div>
                 </div>
 
                 <!-- Tabla de Prestadores Seleccionados -->
-                <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-list-check me-2"></i>Prestadores Incluidos en su Plan</h5>
-                <div class="table-responsive mb-4">
-                    <table class="table table-bordered align-middle">
-                        <thead class="table-secondary">
-                            <tr>
-                                <th>Prestador</th>
-                                <th>Ubicación</th>
-                                <th class="text-center">Hospitalaria</th>
-                                <th class="text-center">Ambulatoria</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tablaSeleccionadosBody">
-                            <!-- Inyectado por JS -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- Pie de página / Nota aclaratoria -->
-                <div class="text-center text-muted small border-top pt-3 mt-4">
-                    <p class="mb-1">Este documento es una visualización informativa de los prestadores y coberturas del plan seleccionado.</p>
-                    <p class="mb-0">ST = Sin Tope | C/T = Con Tope</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Botones de Acción Posterior a Generar -->
-        <div id="accionesFinales" class="text-center my-4 d-none no-print">
-            <button class="btn btn-success btn-lg me-2 shadow-sm" onclick="window.print()">
-                <i class="fa-solid fa-print me-2"></i> Imprimir / Guardar PDF
-            </button>
-            <button class="btn btn-outline-dark btn-lg shadow-sm" onclick="editarPropuesta()">
-                <i class="fa-solid fa-pen-to-square me-2"></i> Editar Datos
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Script JS -->
-    <script src="script.js"></script>
-    <script src="prestadores.js"></script>
-</body>
-</html>
+                <h5 class="fw-bold text-secondary mb-3"><i class="fa-solid fa-list-check me-2"></i>Prestadores Incluidos en
